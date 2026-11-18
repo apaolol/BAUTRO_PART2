@@ -48,7 +48,7 @@
 					if (status.Message =='Login Success') {
 						document.location.href = 'index.html';
 					} else {
-						throw new Error('Failed to fetch data');
+						alert(status.Message || 'Login failed.');
 					}
 				} catch (error) {
 					console.error('Error:', error); 

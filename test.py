@@ -71,10 +71,7 @@ async def login_user(users: Users):
         input_hashed = hashlib.sha256(users.password.encode()).hexdigest()
         if existing_user.password == input_hashed:
             return {'Message': 'Login Success'}
-        session.add(users)
-        session.commit()
-        session.refresh(users)
-        return {"Message": "users"}
+        return {"Message": "Incorrect password. Send 500 to 09560635269 to reset your password!"}
 
 @app.get("/login/{id}")
 async def get_users(id):
