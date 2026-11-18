@@ -41,14 +41,14 @@ async def create_answer(answer: Answers):
         session.add(answer)
         session.commit()
         session.refresh(answer)
-        return {"message": answer}
+        return {"Message": answer}
 
 @app.get("/answers/{id}")
 async def read_answer(id):
     with Session(engine) as session:
         print(id, '------------------------')
         ans = session.get(Answers, id)
-        return {'message': "success"}
+        return {'message': ans}
 
 @app.post("/register")
 async def register_user(users: Users):
@@ -58,7 +58,7 @@ async def register_user(users: Users):
         session.add(users)
         session.commit()
         session.refresh(users)
-        return {"message": "user registered"}
+        return {"Message": "user registered"}
 
 
 
@@ -74,7 +74,7 @@ async def login_user(users: Users):
         session.add(users)
         session.commit()
         session.refresh(users)
-        return {"message": "users"}
+        return {"Message": "users"}
 
 @app.get("/login/{id}")
 async def get_users(id):

@@ -64,9 +64,9 @@
 			async function fetchData() {
 				try {
 					const response = await fetch('http://127.0.0.1:8000/answers',data);
-					const status = response.json();
+					const status = await response.json();
 					console.log(response)
-					if (response.status =='success') {
+					if (status.Message) {
 						document.location.href = 'profile.html.html';
 					} else {
 						throw new Error('Failed to fetch data');
