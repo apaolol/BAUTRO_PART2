@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>register</title>
+		<link rel="stylesheet" href="styles.css">
+		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	</head>
+
+	<body>
+
+	
+
+		Enter your chosen username
+		<input id='user' type='text'>
+		Enter your chosen Password
+		<input id='pass' type='password'>
+        Confirm Password
+        <input id='confirm-pass' type='password'>
+
+       
+
+		<script>
+
+
+		const clickButton = (user, pass, confirmPass) =>{
+			if (!user.trim() || !pass) {
+				alert('Enter a username and password.');
+				return;
+			}
+			if (pass !== confirmPass) {
+				alert('Passwords do not match.');
+				return;
+			}
+
+			const postData = {
+				user_name: user,
+                password: pass
+			};
+
+			const data = {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(postData)
+			}
+	
+			async function fetchData() {
+				try {
+					const response = await fetch('http://127.0.0.1:8000/register',data);
+					const status = await response.json();
+					console.log(response)
+					if (status.Message === 'user registered') {
+						alert('User registered successfully.');
+						document.location.href = 'login.html';
+					} else {
+						throw new Error('Failed to fetch data');
+					}
+				} catch (error) {
+					console.error('Error:', error); 
+				}
+			}
+
+			return fetchData()
+	
+		}
+
+		</script>
+
+         <button type="button" onclick="clickButton(document.getElementById('user').value, document.getElementById('pass').value, document.getElementById('confirm-pass').value)">Register</button>
+	</body>
+</html>
