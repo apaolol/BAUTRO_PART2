@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>register</title>
+		<link rel="stylesheet" href="styles.css">
+		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	</head>
+
+	<body>
+
+	
+
+		Enter your chosen username
+		<input id='user' type='text'>
+		Enter your chosen Password
+		<input id='pass' type='text'>
+        Confirm Password
+        <input id='pass' type='text'>
+
+       
+
+		<script>
+
+
+		const clickButton = (user, pass) =>{
+
+			const postData = {
+				user:user,
+                pass:pass
+			};
+
+			const data = {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(postData)
+			}
+	
+			async function fetchData() {
+				try {
+					const response = await fetch('http://127.0.0.1:8000/login',data);
+					const status = response.json();
+					console.log(response)
+					if (response.status =='success') {
+						document.location.href = 'profile.html.html';
+					} else {
+						throw new Error('Failed to fetch data');
+					}
+				} catch (error) {
+					console.error('Error:', error); 
+				}
+			}
+
+			fetchData()
+	
+		}
+
+		</script>
+
+         <button type="button" onclick="clickButton(document.getElementById('user').value, document.getElementById('pass').value)">Log In</button>
+	</body>
+</html>
